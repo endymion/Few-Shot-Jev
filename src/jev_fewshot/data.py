@@ -74,8 +74,9 @@ def demonstration_draws(train: Sequence[Article], scoreboard: Sequence[Article],
             if len(candidates) < 4:
                 raise ValueError(f"Not enough safe train examples for {label}")
             draw.extend(rng.sample(candidates, 4))
-        # A distinct fixed ordering per draw removes a permanent label-order advantage.
-        rng.shuffle(draw)
+        # Phase I deliberately preserves one canonical display order: World, Sports,
+        # Business, Sci/Tech. Ordering sensitivity is a separate follow-up after
+        # the primary result, not a variable silently mixed into it.
         draws[seed] = draw
     return draws
 
@@ -91,7 +92,7 @@ def examples_for_shots(draw: Sequence[Article], shots: int) -> list[Article]:
     for label in LABELS:
         members = [row for row in draw if row.label == label]
         selected.extend(members[:per_class])
-    # Preserve the preselected draw display order after taking each nested prefix.
+    # Preserve the canonical class and within-class selection order after taking each prefix.
     ids = {row.manifest_id for row in selected}
     return [row for row in draw if row.manifest_id in ids]
 

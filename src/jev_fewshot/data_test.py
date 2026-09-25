@@ -22,3 +22,4 @@ def test_a_demo_draw_drops_exact_normalized_test_text_and_is_nested():
     assert not {text_hash(row.text) for row in draw} & {text_hash(row.text) for row in scoreboard}
     assert {row.manifest_id for row in examples_for_shots(draw, 4)} <= {row.manifest_id for row in examples_for_shots(draw, 8)}
     assert {row.manifest_id for row in examples_for_shots(draw, 8)} <= {row.manifest_id for row in examples_for_shots(draw, 16)}
+    assert [row.label for row in examples_for_shots(draw, 4)] == list(labels)

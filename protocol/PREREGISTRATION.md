@@ -21,7 +21,9 @@ demonstration draws, both with replacement, for 2,000 resamples using seed
   Sports, Business, Sci/Tech; then ordered by class and upstream row index.
 - Demonstrations: five four-per-class samples from the train split, using seeds
   0–4. A train row whose normalized text exactly matches a scoreboard row is
-  excluded. No test label or remaining test item enters example selection.
+  excluded. No test label or remaining test item enters example selection. In
+  this initial run examples always appear in canonical class order: World,
+  Sports, Business, Sci/Tech.
 - The repository ships only source IDs, labels, and normalized-text hashes in
   the manifest. It does not redistribute AG News article text.
 
@@ -32,8 +34,9 @@ criteria `World`, `Sports`, `Business`, and `Sci/Tech`. Every state contains
 `labeled_examples` and `target`; zero-shot uses an empty example list.
 
 For each draw, demonstrations are nested: 4-shot has one example per class,
-8-shot has two, and 16-shot has four. Their display order is a deterministic
-draw-specific shuffle. Zero-shot runs once per target. Each few-shot level runs
+8-shot has two, and 16-shot has four. Their display order stays fixed so that
+the initial result measures example content, not a mixture of content and
+ordering treatments. Zero-shot runs once per target. Each few-shot level runs
 once per target per draw: 32,000 calls total.
 
 ## Secondary reporting
