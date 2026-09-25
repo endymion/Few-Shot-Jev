@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jev-agnews-fewshot"
+version = "0.1.0"
+description = "A preregistered zero-shot versus few-shot Jev benchmark on AG News"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+  "datasets>=3.0",
+  "typesafe-sdk",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+jev-agnews = "jev_fewshot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["src", "tests"]
+python_files = ["*_test.py", "test_*.py"]
